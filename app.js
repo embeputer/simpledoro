@@ -17,10 +17,12 @@ let completed = 0;
 
 const fmt = (s) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 
+const MODE_LABELS = { focus: "focus", short: "short break", long: "long break" };
+
 function render() {
   const label = fmt(remaining);
   timeEl.textContent = label;
-  document.title = `${label} · simpledoro`;
+  document.title = timer ? `${label} · ${MODE_LABELS[mode]}` : `${label} · simpledoro`;
   ringEl.style.strokeDashoffset = String(RING_LEN * (1 - remaining / DURATIONS[mode]));
   toggleEl.textContent = timer ? "pause" : "start";
   dialEl.classList.toggle("running", Boolean(timer));
