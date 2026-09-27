@@ -17,6 +17,14 @@ let completed = 0;
 
 const fmt = (s) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 
+function updateSky() {
+  const h = new Date().getHours();
+  document.body.dataset.time =
+    h >= 19 || h < 5 ? "night" : h < 7 ? "dawn" : h < 17 ? "day" : "dusk";
+}
+updateSky();
+setInterval(updateSky, 60 * 1000);
+
 const MODE_LABELS = { focus: "focus", short: "short break", long: "long break" };
 
 function render() {
