@@ -76,9 +76,10 @@ function nextMode() {
 function finish() {
   stop();
   if (mode === "focus") completed++;
+  const next = nextMode();
   chime();
-  notify();
-  setMode(nextMode(), true);
+  notify(next);
+  setMode(next, true);
 }
 
 function chime() {
@@ -101,10 +102,9 @@ function chime() {
   }
 }
 
-function notify() {
+function notify(next) {
   if (typeof Notification === "undefined" || Notification.permission !== "granted") return;
-  const body = mode === "focus" ? "Focus done — take a break." : "Break over — back to focus.";
-  new Notification("simpledoro", { body });
+  new Notification("simpledoro", { body: `it is now ${MODE_LABELS[next]} time!` });
 }
 
 function toggle() {
