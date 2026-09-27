@@ -1,0 +1,111 @@
+:root {
+  --bg: #faf9f6;
+  --fg: #1c1b1a;
+  --muted: #9b9891;
+  --track: #e8e5df;
+  --accent: #e2543e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161514;
+    --fg: #eceae6;
+    --muted: #6f6c66;
+    --track: #2a2825;
+    --accent: #e8634c;
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  display: grid;
+  place-items: center;
+  -webkit-font-smoothing: antialiased;
+  transition: background .3s, color .3s;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  user-select: none;
+}
+
+.modes { display: flex; gap: 1.5rem; }
+
+button {
+  font: inherit;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: .25rem 0;
+  letter-spacing: .04em;
+  transition: color .15s;
+}
+
+button:hover { color: var(--fg); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
+
+.mode.active { color: var(--fg); border-bottom: 2px solid var(--accent); }
+
+.dial { position: relative; width: min(72vw, 300px); }
+
+.dial svg { display: block; width: 100%; transform: rotate(-90deg); }
+
+.dial circle {
+  fill: none;
+  stroke-width: 3;
+}
+
+.ring-bg { stroke: var(--track); }
+
+.ring-fg {
+  stroke: var(--accent);
+  stroke-linecap: round;
+  stroke-dasharray: 578.05; /* 2π·92 */
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset .35s linear;
+}
+
+.time {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: clamp(3.5rem, 14vw, 4.75rem);
+  font-weight: 200;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+}
+
+.dial.running .time { font-weight: 300; }
+
+.controls { display: flex; gap: 1.75rem; align-items: baseline; }
+
+.primary { color: var(--fg); font-weight: 500; }
+.primary:hover { color: var(--accent); }
+
+.dots { display: flex; gap: .55rem; min-height: .6rem; }
+
+.dot {
+  width: .55rem;
+  height: .55rem;
+  border-radius: 50%;
+  background: var(--track);
+}
+
+.dot.done { background: var(--accent); }
+
+.hint {
+  color: var(--muted);
+  font-size: .78rem;
+  letter-spacing: .03em;
+}

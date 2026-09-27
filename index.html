@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>simpledoro</title>
+  <meta name="description" content="A minimal pomodoro timer." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='%23e2543e'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <div class="modes" role="tablist" aria-label="Timer mode">
+      <button class="mode active" data-mode="focus" role="tab" aria-selected="true">focus</button>
+      <button class="mode" data-mode="short" role="tab" aria-selected="false">short break</button>
+      <button class="mode" data-mode="long" role="tab" aria-selected="false">long break</button>
+    </div>
+
+    <div class="dial" id="dial">
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <circle class="ring-bg" cx="100" cy="100" r="92" />
+        <circle class="ring-fg" id="ring" cx="100" cy="100" r="92" />
+      </svg>
+      <div class="time" id="time" role="timer" aria-live="off">25:00</div>
+    </div>
+
+    <div class="controls">
+      <button id="toggle" class="primary">start</button>
+      <button id="reset">reset</button>
+      <button id="skip">skip</button>
+    </div>
+
+    <div class="dots" id="dots" aria-label="Completed focus sessions"></div>
+
+    <p class="hint">space — start/pause · r — reset · s — skip</p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
